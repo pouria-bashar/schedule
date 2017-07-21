@@ -20,6 +20,14 @@ module.exports = {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
-    }]
+    },
+    {
+       test: /\.css$/,
+       loaders: [
+         'style-loader',
+         'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[local]___[hash:base64:5]',
+         'postcss-loader'
+       ]
+     }]
   }
 };
