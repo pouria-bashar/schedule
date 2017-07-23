@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const { resolve } = require('path');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -18,7 +19,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
+      use: ['react-hot-loader', 'babel-loader'],
       include: path.join(__dirname, 'src')
     },
     {
@@ -29,5 +30,14 @@ module.exports = {
          'postcss-loader'
        ]
      }]
-  }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      components: resolve('./src/components/index.js'),
+      constants: resolve('./src/constants/index.js'),
+      utils: resolve('./src/utils'),
+    },
+  },
+
 };

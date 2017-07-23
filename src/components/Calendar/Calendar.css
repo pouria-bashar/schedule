@@ -1,0 +1,164 @@
+.container {
+  position: relative;
+  padding: 0;
+  user-select: none;
+  display: inline-block;
+  font-size: 0.75em;
+  line-height: 2em;
+  position: relative;
+  margin: 0em 0 -0.66667em;
+  background: white;
+}
+
+.month {
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  user-select: none;
+}
+
+.navBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0;
+}
+
+
+.caption {
+  display: table-caption;
+  height: 1.5rem;
+  text-align: left;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.weekdays {
+  display: table-header-group;
+}
+
+
+.weekdaysRow {
+  display: table-row;
+}
+
+.weekday {
+  display: table-cell;
+  padding: .5rem;
+  font-size: .875em;
+  text-align: center;
+  border-top: 1px solid rgba(60,63,81,.2);
+  color: #3c3f51;
+  opacity: 0.75;
+  font-size: inherit;
+}
+
+.weekday abbr[title] {
+  border: 0;
+  text-decoration: none;
+}
+
+.body {
+  display: table-row-group;
+}
+
+.week {
+  display: table-row;
+}
+
+.day {
+  display: table-cell;
+  padding: 0.4em 0.6em 0.2em;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+  font-weight: 500;
+  outline-width: 0;
+}
+
+.dayOutlined {
+    outline-width: medium;
+}
+
+.date {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline-block;
+  vertical-align: top;
+  /* we might need to bring it back later so commented out for now*/
+  /*border-bottom: 1px solid transparent;*/
+}
+/* Default modifiers */
+
+.today .date {
+  color: #3c3f51;
+  border-bottom: 2px solid #007AC9;
+  padding-bottom: 0.2em;
+  font-weight: 500;
+}
+
+.disabled {
+  color: #dce0e0;
+  background-color: #eff1f1;
+  cursor: default;
+}
+
+.outside {
+  cursor: default;
+  color: #3c3f51;
+  opacity: 0.75;
+}
+
+.selected:not(.disabled):not(.outside) {
+  color: #3c3f51;
+  background: rgba(0, 122, 201, 0.1);
+}
+
+/* we might need to bring it back later so commented out for now*/
+/*.selected:not(.disabled):not(.outside) .date {
+  border-bottom: 1px solid #000;
+}*/
+
+/* Example of custom modifiers */
+
+.sunday {
+  border: 1px solid #4A90E2;
+}
+
+.sunday:not(.outside) {
+  color: #4A90E2;
+}
+
+.green {
+  color:springgreen;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.event {
+  font-weight: bold;
+}
+
+.nextMonth {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  margin-left: 0.4rem;
+  margin-right: 0;
+}
+
+.prevMonth {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+
+.selectedWeek {
+  background: rgba(0, 122, 201, 0.1);
+  /*&>div {
+    border-bottom: 2px solid transparent !important;
+  }*/
+}

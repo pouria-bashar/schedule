@@ -1,0 +1,12 @@
+@import "../../../colours";
+.time {
+  height: 60px;
+  border: solid 1px $clouds;
+  border-top: 0;
+  display: flex;
+}
+
+.time > span {
+  border-right: solid 1px $clouds;
+  width: 80px;
+}

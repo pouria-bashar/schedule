@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import styles from './App.css';
+import './styleguide.css';
+import { Toolbar, Schedule } from 'components';
 
 export default class App extends Component {
   render() {
     return (
-      <h1 className={styles.abc}>Hello, world.</h1>
+      <div style={{ margin: '50px auto', width: '80%' }}>
+        <Toolbar />
+        <Schedule.Day />
+      </div>
     );
   }
 }
