@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styleguide.css';
-import { Toolbar, Schedule } from 'components';
+import { Toolbar, Schedule, Footer } from 'components';
 
 export default class App extends Component {
 
@@ -26,6 +26,7 @@ export default class App extends Component {
           onViewChange={this._handleViewChange}
         />
         <Schedule view={selectedView} />
+        <Footer />
       </div>
     );
   }

@@ -38,8 +38,8 @@
   right: 0;
   bottom: 0;
   position: absolute;
-  height: 2px;
-  background: #002664;
+  height: 4px;
+  background: $midnight_blue;
 }
 
 
@@ -50,7 +50,7 @@
 }
 .calendar {
   position: absolute;
-  top: 45px;
+  top: 42px;
   left: -34px;
   box-shadow: 0 0 6px 1px rgba(0,0,0,.2);
 }

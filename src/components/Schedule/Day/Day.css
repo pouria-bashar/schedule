@@ -1,4 +1,8 @@
 @import "../../../colours";
+.container {
+  height: 500px;
+  overflow: auto;
+}
 .time {
   height: 60px;
   border: solid 1px $clouds;
