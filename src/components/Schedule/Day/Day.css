@@ -9,4 +9,5 @@
 .time > span {
   border-right: solid 1px $clouds;
   width: 80px;
+  padding: 10px;
 }

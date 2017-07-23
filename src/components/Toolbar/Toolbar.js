@@ -11,13 +11,24 @@ const cx = classNames.bind(styles);
 
 class Toolbar extends Component {
 
-  state = {
-    showCalendar: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCalendar: false,
+    }
+    this._handleViewChange = this._handleViewChange.bind(this);
+  }
+
+
+  _handleViewChange(selectedView) {
+    this.props.onViewChange(selectedView);
   }
 
   render() {
     const {
       className,
+      onViewChange,
+      selectedView,
     } = this.props;
 
     const { showCalendar } = this.state;
@@ -52,18 +63,16 @@ class Toolbar extends Component {
           </li>
         </ul>
         <ul className={styles.views}>
-          <li>
-            <a>Day</a>
-          </li>
-          <li>
-            <a>Week</a>
-          </li>
-          <li>
-            <a>Month</a>
-          </li>
-          <li>
-            <a>Timeline</a>
-          </li>
+          {
+            ['Day', 'Week', 'Month', 'Timeline'].map(view => (
+              <li
+                className={cx({ selected: view.toLowerCase() === selectedView })}
+                onClick={() => this._handleViewChange(view.toLowerCase())}
+              >
+                <a>{view}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     );
@@ -71,5 +80,10 @@ class Toolbar extends Component {
 }
 Toolbar.propTypes = {
   className: PropTypes.string,
+  selectedView: PropTypes.string,
+  onViewChange: PropTypes.func.isRequired,
+};
+Toolbar.defaultProps = {
+  onViewChange: () => {},
 };
 export default Toolbar;

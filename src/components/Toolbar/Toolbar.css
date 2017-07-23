@@ -3,9 +3,8 @@
 .container {
   background: $emrald;
   display: flex;
-  height: 40px;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
   line-height: 24px;
 }
 
@@ -21,8 +20,26 @@
 .views {
   display: flex;
   li {
+    width: 70px;
+    text-align: center;
     padding: 10px;
+    cursor: pointer;
+    position: relative;
   }
+}
+
+.views li:hover{
+  background: $nephritis;
+}
+.selected::after {
+  content: '';
+  display: inline-block;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  height: 2px;
+  background: #002664;
 }
 
 
