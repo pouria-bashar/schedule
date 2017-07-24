@@ -37,6 +37,8 @@ module.exports = {
       components: resolve('./src/components/index.js'),
       constants: resolve('./src/constants/index.js'),
       utils: resolve('./src/utils'),
+      actionTypes: resolve('./src/actions/actionTypes'),
+      actions: resolve('./src/actions/index'),
     },
   },
 

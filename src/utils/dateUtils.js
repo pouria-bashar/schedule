@@ -10,3 +10,8 @@ export const getDayHours = (interval = 60) => {
   }
   return rc.slice(7);
 }
+
+
+export const addToTime = (time, amount = 30) => {
+  return moment(time, Constants.TIME_FORMAT).add(amount, 'm').format(Constants.TIME_FORMAT);
+}

@@ -9,23 +9,33 @@ export default class App extends Component {
 
     this.state = {
       selectedView: 'day',
+      selectedDate: new Date(),
     }
     this._handleViewChange = this._handleViewChange.bind(this);
+    this._handelDateChange = this._handelDateChange.bind(this);
   }
 
 
   _handleViewChange(selectedView) {
     this.setState({ selectedView });
   }
+  _handelDateChange(selectedDate) {
+    this.setState({ selectedDate });
+  }
   render() {
-    const { selectedView } = this.state;
+    const { selectedView, selectedDate } = this.state;
     return (
       <div style={{ margin: '50px auto', width: '80%' }}>
         <Toolbar
           selectedView={selectedView}
+          selectedDate={selectedDate}
           onViewChange={this._handleViewChange}
+          onDateChange={this._handelDateChange}
         />
-        <Schedule view={selectedView} />
+        <Schedule
+          view={selectedView}
+          selectedDate={selectedDate}
+        />
         <Footer />
       </div>
     );

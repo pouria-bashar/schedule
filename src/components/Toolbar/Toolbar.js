@@ -4,7 +4,7 @@ import styles from './Toolbar.css';
 import classNames from 'classnames/bind';
 import { Icon, Calendar } from '../index';
 import moment from 'moment';
-
+import { DISPLAY_DATE_FORMAT } from 'constants';
 
 const cx = classNames.bind(styles);
 
@@ -17,63 +17,75 @@ class Toolbar extends Component {
       showCalendar: false,
     }
     this._handleViewChange = this._handleViewChange.bind(this);
+    this._handleDateChange = this._handleDateChange.bind(this);
+    this._handleDateSelect = this._handleDateSelect.bind(this);
   }
 
 
   _handleViewChange(selectedView) {
     this.props.onViewChange(selectedView);
   }
+  _handleDateSelect(selectedDate) {
+    this.setState({ showCalendar: false });
+    this.props.onDateChange(selectedDate);
+  }
+
+  _handleDateChange(amount) {
+    if(amount === 0) {
+      this.props.onDateChange(new Date());
+      return;
+    }
+    const selectedDate =  moment(this.props.selectedDate).add(amount, 'days').toDate();
+    this.props.onDateChange(selectedDate);
+  }
 
   render() {
     const {
-      className,
       onViewChange,
       selectedView,
+      selectedDate,
     } = this.props;
 
     const { showCalendar } = this.state;
-    const containerClassName = cx({
-      container: true,
-      [className]: !!className,
-    },
-  );
+
     return (
-      <div className={containerClassName}>
-        <ul className={styles.date}>
-          <li>
-            <a>TODAY</a>
-          </li>
-          <li>
-            <a><Icon name="keyboard_arrow_left" /></a>
-            <a><Icon name="keyboard_arrow_right" /></a>
-          </li>
-          <li>
-            <a><Icon name="event_note" /></a>
-            <a>
-              <div
-                className={styles.calendarContainer}
-                onClick={() => this.setState({ showCalendar: !showCalendar })}
-              >
-                <span>{moment().format('YYYY-DD-MM')}</span>
-                <div className={styles.calendar}>
-                  {showCalendar && <Calendar />}
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <ul className={styles.views}>
+      <div className={styles.container}>
+        <div className={styles.date}>
+          <button onClick={() => this._handleDateChange(0)}>TODAY</button>
+          <button onClick={() => this._handleDateChange(1)}>
+            <Icon name="keyboard_arrow_left" />
+          </button>
+          <button onClick={() => this._handleDateChange(1)}>
+            <Icon name="keyboard_arrow_right" />
+          </button>
+          <div className={styles.calendarContainer}>
+            <button onClick={() => this.setState({ showCalendar: !showCalendar })}>
+              <Icon name="event_note" />
+              <span>{moment(selectedDate).format(DISPLAY_DATE_FORMAT)}</span>
+            </button>
+            <div className={styles.calendar}>
+              {showCalendar && (
+                <Calendar
+                  selectedDate={selectedDate}
+                  onDateSelect={this._handleDateSelect}
+                />
+              )}
+            </div>
+          </div>
+
+        </div>
+        <div className={styles.views}>
           {
             ['Day', 'Week', 'Month', 'Timeline'].map(view => (
-              <li
+              <button
                 className={cx({ selected: view.toLowerCase() === selectedView })}
+                key={view}
                 onClick={() => this._handleViewChange(view.toLowerCase())}
-              >
-                <a>{view}</a>
-              </li>
+              >{view}
+              </button>
             ))
           }
-        </ul>
+        </div>
       </div>
     );
   }

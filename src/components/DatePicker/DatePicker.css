@@ -7,7 +7,7 @@
   line-height: 2em;
   position: relative;
   background: white;
-  padding: 10px;
+  font-size: 12px;
 }
 
 .month {
@@ -181,4 +181,21 @@
 
 .selectedWeek {
   background: rgba(0, 122, 201, 0.1);
+}
+
+.dayPickerInput {
+  display: inline-block;
+}
+
+.overlayWrapper {
+  position: relative;
+}
+
+.overlay {
+  z-index: 1;
+  left: 0;
+  position: absolute;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+  padding: 10px;
 }

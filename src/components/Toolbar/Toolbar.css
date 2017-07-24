@@ -6,31 +6,32 @@
   align-items: center;
   padding: 0 10px;
   line-height: 24px;
+  button {
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 10px;
+    color: $midnight_blue;
+  }
 }
 
 .date {
   flex: 1;
   display: flex;
-  li {
-    padding: 10px;
+  button {
     display: flex;
+    align-items: center;
   }
 }
 
 .views {
   display: flex;
-  li {
-    width: 70px;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer;
+  button {
+    width: 100px;
     position: relative;
   }
 }
 
-.views li:hover{
-  background: $nephritis;
-}
 .selected::after {
   content: '';
   display: inline-block;
@@ -46,11 +47,15 @@
 .calendarContainer {
   position: relative;
   cursor: pointer;
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 10px;
+  }
 }
 .calendar {
   position: absolute;
-  top: 42px;
-  left: -34px;
+  top: 44px;
+  left: 10px;
   box-shadow: 0 0 6px 1px rgba(0,0,0,.2);
 }

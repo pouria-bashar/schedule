@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addEvent } from 'actions';
 import Day from './Day/Day';
 import Week from './Week/Week';
 import Month from './Month/Month';
 import styles from './Schedule.css';
 
 const views = {
-  day: <Day />,
-  week: <Week />,
-  month: <Month />
+  day: Day,
+  week: Week,
+  month: Month,
 }
 class Schedule extends Component {
 
   render() {
-    const { view } = this.props;
-
+    const { view, selectedDate, addEvent, events } = this.props;
+    const View = views[view];
     return (
       <div className={styles.container}>
-        { views[view] }
+        <View
+          selectedDate={selectedDate}
+          events={events}
+          addEvent={addEvent}
+        />
       </div>
     );
   }
@@ -28,4 +34,8 @@ Schedule.propTypes = {
 Schedule.defaultProps = {
   view: 'day',
 };
-export default Schedule;
+
+function mapStateToProps({ events }) {
+  return { events: events.items };
+}
+export default connect(mapStateToProps, { addEvent })(Schedule);

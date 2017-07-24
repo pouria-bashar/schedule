@@ -1,0 +1,57 @@
+@import "../../../colours";
+/**
+ * newEvent
+ */
+.newEvent {
+
+}
+
+.title {
+  height: 30px;
+  background: $nephritis;
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 10px 20px;
+}
+.title > h1 {
+  flex-grow: 1;
+  color: $midnight_blue;
+}
+
+.form {
+  padding: 20px;
+}
+.form label {
+  margin-right: 10px;
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.form > div {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.form input {
+  padding: 10px;
+  width: 100%;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.actions button {
+  padding: 10px;
+  width: 80px;
+}
+.actions button:first-child {
+  margin-right: 10px;
+  background-color: $beliz;
+  color: white;
+}
+.actions button:last-child {
+  background-color: $silver;
+}

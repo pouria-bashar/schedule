@@ -15,3 +15,14 @@
   width: 80px;
   padding: 10px;
 }
+
+.timeslot {
+  flex-grow: 1;
+}
+.timeslot > div {
+  height: 30px;
+}
+
+.timeslot > div:first-child {
+  border-bottom: solid 1px $clouds;
+}
