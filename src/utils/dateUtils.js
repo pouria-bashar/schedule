@@ -15,3 +15,13 @@ export const getDayHours = (interval = 60) => {
 export const addToTime = (time, amount = 30) => {
   return moment(time, Constants.TIME_FORMAT).add(amount, 'm').format(Constants.TIME_FORMAT);
 }
+
+
+export function getDuration(startTime, endTime) {
+  return moment(endTime, Constants.TIME_FORMAT).diff(moment(startTime, Constants.TIME_FORMAT), 'minutes');
+}
+
+
+export function isSameDate(dateA, dateB) {
+  return moment(dateA).startOf('day').isSame(moment(dateB).startOf('day'), 'd');
+}

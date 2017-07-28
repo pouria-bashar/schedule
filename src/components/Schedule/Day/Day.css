@@ -4,7 +4,6 @@
   overflow: auto;
 }
 .time {
-  height: 60px;
   border: solid 1px $clouds;
   border-top: 0;
   display: flex;
@@ -12,8 +11,9 @@
 
 .time > span {
   border-right: solid 1px $clouds;
-  width: 80px;
+  width: 100px;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .timeslot {
@@ -21,8 +21,20 @@
 }
 .timeslot > div {
   height: 30px;
+  box-sizing: border-box;
 }
 
 .timeslot > div:first-child {
   border-bottom: solid 1px $clouds;
+}
+
+
+.grid {
+  position: relative;
+}
+
+
+.eventEntry {
+  padding: 10px;
+  box-sizing: border-box;
 }

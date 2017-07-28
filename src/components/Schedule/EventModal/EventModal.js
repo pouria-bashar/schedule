@@ -17,7 +17,6 @@ const style = {
     border: 0,
     transform: 'translate(-50%, -50%)',
     width: '664px',
-    minHeight: '224px',
     padding: 0,
     overflow: 'visible',
     borderRadius: 'none',

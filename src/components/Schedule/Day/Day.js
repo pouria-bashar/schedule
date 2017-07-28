@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import styles from './Day.css';
 import PropTypes from 'prop-types';
-import { getDayHours } from 'utils/dateUtils';
+import { getDayHours, isSameDate } from 'utils/dateUtils';
 import Timeslot from './Timeslot';
 import EventModal from '../EventModal/EventModal';
+import { calculatePosition } from '../util';
+import EventEntry from './EventEntry';
+import { getTimeClassName } from '../util';
 
+const gridHeight = 60; //Pixels. 1 hour grid height
 
 export default class Day extends Component {
 
@@ -28,9 +32,21 @@ export default class Day extends Component {
     this.setState({ isOpen: true });
   }
 
-  _renderEvents(events, selectedDate, gridElement) {
-    const selectedDatesEvents = events.filter((event) => event.startDate === selectedDate );
-    console.log(events, selectedDate, gridElement);
+  _renderEvents(events = [], selectedDate, gridElement) {
+    if(!gridElement) return;
+    const selectedDatesEvents = events.filter((event) => isSameDate(event.startDate, selectedDate));
+    return selectedDatesEvents.map((event, index) => {
+      const rect = gridElement.getBoundingClientRect();
+      const elementsWithSameEndTime = gridElement.getElementsByClassName(getTimeClassName(event.endTime));
+      const position = calculatePosition({ event, rect, gridHeight, numberOfEntriesInHour: elementsWithSameEndTime.length, index });
+      return (
+        <EventEntry
+          style={position.style}
+          event={event}
+          key={index}
+        />
+      )
+    });
   }
 
   render() {
@@ -44,7 +60,11 @@ export default class Day extends Component {
         >
           {
             getDayHours().map(time => (
-              <div className={styles.time} key={time}>
+              <div
+                className={styles.time}
+                style={{ height: `${gridHeight}px`}}
+                key={time}
+              >
                 <span>{time}</span>
                 <Timeslot
                   time={time}
@@ -53,13 +73,13 @@ export default class Day extends Component {
               </div>
             ))
           }
+          {this._renderEvents(events, selectedDate, this.grid)}
         </div>
         <EventModal
           isOpen={isOpen}
           onClose={this._handleClose}
           addEvent={addEvent}
         />
-        {this._renderEvents(events, selectedDate, this.grid)}
       </div>
     );
   }
