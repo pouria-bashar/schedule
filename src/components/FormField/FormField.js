@@ -5,12 +5,12 @@ const getComponent = (Component) => {
   return Component;
 }
 
-const FormField = ({ error, label, className, field, ...rest}) => {
+const FormField = ({ error, label, className, field, registerChild, ...rest}) => {
   const Component = getComponent(field);
   return (
     <div className={className}>
       <label>{label}</label>
-      <Component {...rest} />
+      <Component ref={registerChild} {...rest} />
       {
         error && <span>{error}</span>
       }

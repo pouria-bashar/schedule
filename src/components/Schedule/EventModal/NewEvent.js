@@ -23,9 +23,7 @@ class NewEvent extends Component {
       backgroundColor: colors[0],
       startTime: props.startTime,
       endTime: props.endTime,
-      errors: {
-        title: 'Test'
-      },
+      errors: {},
     };
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -85,7 +83,7 @@ class NewEvent extends Component {
               error={errors['title']}
               className={styles.title}
               onChange={this._handleChange}
-              ref={(el) => this.title = el}
+              registerChild={(el) => this.title = el}
             />
             <FormField
               field={DatePicker}

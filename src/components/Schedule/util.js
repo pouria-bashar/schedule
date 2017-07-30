@@ -20,7 +20,7 @@ export const calculatePosition = ({ event, rect, gridHeight, numberOfEntriesInHo
       top: `${top}px`,
       position: 'absolute',
       right: '0',
-      left: `${firstColumnWidth}px`,
+      left: `0px`,
       width: `${width}%`
     }
   }
