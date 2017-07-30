@@ -9,6 +9,7 @@ import EventEntry from './EventEntry';
 import { debounce } from 'lodash';
 
 const timeslotHeight = 30;
+const gridHeight = 60; //Pixels. 1 hour grid height
 
 const daySlots = getDayHours(30, 14);
 class DayGrid extends Component {
@@ -50,19 +51,15 @@ class DayGrid extends Component {
     const rect = this.grid.getBoundingClientRect();
 
     const top = e.pageY - rect.top;
-    const left = e.pageX - rect.left;
+    // const left = e.pageX - rect.left;
 
-    this.setState({ top, isDraging: true, left, boxStyle: {} });
+    this.setState({ top, isDraging: true, boxStyle: {}, firstIndex: undefined, lastIndex: undefined });
   }
 
   _handleMouseUp(e) {
-    const bottom = e.pageY - 96;
-
-    const { top } = this.state;
-    const firstIndex = Math.floor(top / timeslotHeight);
-    const lastIndex = Math.floor(bottom / timeslotHeight);
-
-    this.setState({ firstIndex, lastIndex, isDraging: false, boxStyle: {} });
+    console.log('mouse up', e.which);
+    const { firstIndex, lastIndex } = this.state;
+    this.setState({ isDraging: false, boxStyle: {} });
     this.props.openEventModal(daySlots[firstIndex], daySlots[lastIndex]);
   }
 
@@ -70,26 +67,28 @@ class DayGrid extends Component {
     const { isDraging, top, left } = this.state;
     if(isDraging) {
       const rect = this.grid.getBoundingClientRect();
-      const width = Math.abs(left - e.pageX) - rect.left;
+
   	  const height = Math.abs(top - e.pageY) - rect.top;
 
-      this.setState({ boxStyle: {
-        position: 'absolute',
-        border: 'solid 1px blue',
-        top: `${top}px`,
-        left: `${left}px`,
-        height: `${height}px`,
-        width: `${width}px`,
-      }})
+      const bottom = e.pageY - rect.top;
+
+      const { top } = this.state;
+      const firstIndex = Math.floor(top / timeslotHeight);
+      const lastIndex = Math.floor(bottom / timeslotHeight);
+
+      this.setState({
+        firstIndex,
+        lastIndex,
+      })
     }
 
   }
 
 
   render() {
-    const { events, selectedDate, onCreateEvent } = this.props;
+    const { events, selectedDate, modalIsOpen } = this.props;
 
-    const { firstIndex, lastIndex, boxStyle } = this.state;
+    const { firstIndex, lastIndex, boxStyle , isDraging} = this.state;
 
     return (
       <div
@@ -98,13 +97,13 @@ class DayGrid extends Component {
         onMouseUp={this._handleMouseUp}
         onMouseMove={this._handleMouseMove}
       >
-        <div style={boxStyle} />
         {
           daySlots.map((time, index) => (
             <Timeslot
               time={time}
               key={time}
-              isSelected={index >= firstIndex && index <= lastIndex}
+              text={index === firstIndex ? `${daySlots[firstIndex]}-${daySlots[lastIndex]}` : ''}
+              isSelected={(modalIsOpen || isDraging) && (index >= firstIndex && index <= lastIndex)}
               onMouseDown={this._handleMouseDown}
               registerChild={el => this[`item_${index}`] = el}
             />

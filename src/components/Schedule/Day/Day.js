@@ -27,7 +27,6 @@ export default class Day extends Component {
   }
 
   _openEventModal(startTime, endTime) {
-    console.log(startTime, endTime);
     this.setState({ isOpen: true, startTime, endTime });
   }
 
@@ -42,6 +41,7 @@ export default class Day extends Component {
           events={events}
           selectedDate={selectedDate}
           openEventModal={this._openEventModal}
+          modalIsOpen={isOpen}
         />
         <EventModal
           isOpen={isOpen}

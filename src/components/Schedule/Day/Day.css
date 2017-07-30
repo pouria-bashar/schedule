@@ -38,6 +38,7 @@
   border-right: solid 1px $clouds;
   height: 30px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .grid {
