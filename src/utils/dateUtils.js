@@ -1,14 +1,14 @@
 import moment from 'moment';
 import * as Constants from 'constants'
 
-export const getDayHours = (interval = 60) => {
+export const getDayHours = (interval = 60, sliceItems = 7) => {
   const dt = new Date(1970, 0, 1, 0, 0, 0, 0);
   const rc = [];
   while (dt.getDate() === 1) {
       rc.push(moment(dt).format(Constants.TIME_FORMAT));
       dt.setMinutes(dt.getMinutes() + interval);
   }
-  return rc.slice(7);
+  return rc.slice(sliceItems);
 }
 
 

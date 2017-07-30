@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import NewEvent from './NewEvent';
+import { CSSTransitionGroup } from 'react-transition-group'
+import styles from './EventModal.css';
 
 const style = {
   overlay: {
@@ -30,6 +32,8 @@ export default class EventModal extends Component {
       isOpen,
       onClose,
       addEvent,
+      startTime,
+      endTime,
     } = this.props;
 
     return (
@@ -39,7 +43,26 @@ export default class EventModal extends Component {
         contentLabel="Modal"
         style={style}
       >
-        <NewEvent onClose={onClose} addEvent={addEvent} />
+      <CSSTransitionGroup
+          transitionName={{
+            appear: styles.appear,
+            appearActive: styles.appearActive,
+            leave: styles.leave,
+            leaveActive: styles.leaveActive,
+          }}
+          transitionAppear
+          transitionLeave
+          transitionEnter={false}
+          transitionAppearTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          <NewEvent
+            onClose={onClose}
+            addEvent={addEvent}
+            startTime={startTime}
+            endTime={endTime}
+          />
+        </CSSTransitionGroup>
       </Modal>
     );
   }
@@ -48,4 +71,6 @@ EventModal.propTypes = {
   selectedDate: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
 };

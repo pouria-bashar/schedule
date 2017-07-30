@@ -23,7 +23,7 @@ class Week extends Component {
                 <span>{time}</span>
                 {
                   WEEKDAYS.map(day => (
-                    <div className={styles.day}/>
+                    <div className={styles.day} />
                   ))
                 }
               </div>

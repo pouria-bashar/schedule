@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './EventModal.css';
-import { Icon, DatePicker, TimePicker } from 'components';
+import { Icon, DatePicker, TimePicker, FormField } from 'components';
 import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'constants';
 import moment from 'moment';
 import AddSuccess from './AddSuccess';
+import validate from './validate';
 
 const colors = [
   '#f1c40f',
@@ -20,6 +21,11 @@ class NewEvent extends Component {
     this.state = {
       startDate: new Date(),
       backgroundColor: colors[0],
+      startTime: props.startTime,
+      endTime: props.endTime,
+      errors: {
+        title: 'Test'
+      },
     };
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -60,7 +66,8 @@ class NewEvent extends Component {
 
   render() {
     const { onClose, addEvent } = this.props;
-    const { startDate } = this.state;
+    const { startDate, errors, startTime, endTime } = this.state;
+
     return (
       <div className={styles.newEvent}>
         <div className={styles.header}>
@@ -70,64 +77,67 @@ class NewEvent extends Component {
           </button>
         </div>
         <form onSubmit={this._handleSubmit} className={styles.form}>
-          <div className={styles.title}>
-            <label>Title:</label>
-            <input
+            <FormField
+              label="Title"
+              field="input"
               name="title"
               type="text"
+              error={errors['title']}
+              className={styles.title}
               onChange={this._handleChange}
               ref={(el) => this.title = el}
             />
-          </div>
-          <div>
-            <label>Start Date:</label>
-            <DatePicker
+            <FormField
+              field={DatePicker}
+              label="Title"
               name="startDate"
+              error={errors['startDate']}
               selectedDate={startDate}
               onChange={this._handleDateChange}
               format={DATE_FORMAT}
               value={moment(startDate).format(DATE_FORMAT)}
             />
-          </div>
-          <div>
-            <label>From:</label>
-            <TimePicker
+            <FormField
+              field={TimePicker}
+              label="From"
               name="startTime"
+              error={errors['startTime']}
               onChange={this._handleChange}
-              value={this.state.startTime}
+              value={startTime}
             />
-          </div>
-          <div>
-            <label>To:</label>
-            <TimePicker
+            <FormField
+              field={TimePicker}
+              label="To"
               name="endTime"
+              error={errors['endTime']}
               onChange={this._handleChange}
               onSelect={(endTime) => this.setState({ endTime })}
+              value={endTime}
             />
-          </div>
-          <div className={styles.colors}>
-            <label>Event Color:</label>
-            {
-              colors.map(backgroundColor => (
-                <button
-                  key={backgroundColor}
-                  type="button"
-                  style={{ backgroundColor }}
-                  onClick={() => this.setState({ backgroundColor })}
-                >
-                  {backgroundColor === this.state.backgroundColor && <Icon name="done" />}
-                </button>
-              ))
-            }
-          </div>
-          <div className={styles.description}>
-            <label>Description:</label>
-            <input
+            <FormField
+              label="Description"
               name="description"
               type="text"
+              field="input"
+              error={errors['description']}
+              className={styles.description}
               onChange={this._handleChange}
             />
-          </div>
+            <div className={styles.colors}>
+              <label>Event Color:</label>
+              {
+                colors.map(backgroundColor => (
+                  <button
+                    key={backgroundColor}
+                    type="button"
+                    style={{ backgroundColor }}
+                    onClick={() => this.setState({ backgroundColor })}
+                  >
+                    {backgroundColor === this.state.backgroundColor && <Icon name="done" />}
+                  </button>
+                ))
+              }
+            </div>
           <div className={styles.actions}>
             <button type="submit">Save</button>
             <button onClick={onClose} type="button">Cancel</button>
@@ -140,5 +150,7 @@ class NewEvent extends Component {
 NewEvent.propTypes = {
   onClose: PropTypes.func.isRequired,
   addEvent: PropTypes.func.isRequired,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
 };
 export default NewEvent;

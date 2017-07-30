@@ -9,7 +9,7 @@ class TimePicker extends Component {
     super(props);
     this.state = {
       showOptions: false,
-      value: '',
+      value: props.value,
     }
     this._handleChage = this._handleChage.bind(this);
     this._handleContainerMouseDown = this._handleContainerMouseDown.bind(this);

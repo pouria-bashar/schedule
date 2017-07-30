@@ -2,11 +2,28 @@
 .container {
   height: 500px;
   overflow: auto;
+  display: flex;
 }
+
+.container > div {
+  width: 100px;
+}
+
+.timeline span{
+  height: 60px;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  border: solid 1px $clouds;
+  border-bottom: 0;
+}
+
 .time {
   border: solid 1px $clouds;
   border-top: 0;
   display: flex;
+  height: 60px;
 }
 
 .time > span {
@@ -17,24 +34,24 @@
 }
 
 .timeslot {
-  flex-grow: 1;
-}
-.timeslot > div {
+  border-bottom: solid 1px $clouds;
+  border-right: solid 1px $clouds;
   height: 30px;
   box-sizing: border-box;
 }
 
-.timeslot > div:first-child {
-  border-bottom: solid 1px $clouds;
-}
-
-
 .grid {
   position: relative;
+  flex-grow: 1;
 }
 
 
 .eventEntry {
   padding: 10px;
   box-sizing: border-box;
+}
+
+
+.isSelected {
+  background: $pomegranate;
 }
