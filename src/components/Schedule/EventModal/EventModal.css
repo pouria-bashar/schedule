@@ -6,36 +6,20 @@
 
 }
 
-.title {
+.header {
   height: 30px;
   background: $nephritis;
   display: flex;
   align-items: center;
   padding: 10px 10px 10px 20px;
 }
-.title > h1 {
+.header > h1 {
   flex-grow: 1;
   color: $midnight_blue;
 }
 
 .form {
   padding: 20px;
-}
-.form label {
-  margin-right: 10px;
-  max-width: 100px;
-  min-width: 100px;
-}
-
-.form > div {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.form input {
-  padding: 10px;
-  width: 100%;
 }
 
 .actions {
@@ -55,3 +39,83 @@
 .actions button:last-child {
   background-color: $silver;
 }
+
+.colors {
+  display: flex;
+  align-items: center;
+}
+.colors label{
+  min-width: 120px;
+}
+
+.colors button {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.colors i {
+  font-size: 12px;
+  color: white;
+}
+
+.title > input {
+  flex-grow: 1;
+}
+
+.description > input {
+  flex-grow: 1;
+}
+
+
+/**
+ * add success
+ */
+
+.addSuccess {
+  background-color: $midnight_blue;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 25px;
+}
+.addSuccess i{
+  margin-top: 20px;
+  color: $nephritis;
+  font-size: 50px;
+}
+
+.addSuccess button{
+  margin-top: 20px;
+  color: white;
+  font-size: 25px;
+  border: solid 1px;
+  padding: 10px 20px;
+}
+
+
+/**
+ * animation
+ */
+ .appear {
+   opacity: 0.01;
+ }
+
+ .appearActive {
+   opacity: 1;
+   transition: opacity .3s ease-in;
+ }
+
+ .leave {
+   opacity: 1;
+ }
+
+ .leaveActive {
+   opacity: 0.01;
+   transition: opacity 300ms ease-in;
+ }

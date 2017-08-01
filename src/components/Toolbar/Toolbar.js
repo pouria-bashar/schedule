@@ -52,7 +52,7 @@ class Toolbar extends Component {
       <div className={styles.container}>
         <div className={styles.date}>
           <button onClick={() => this._handleDateChange(0)}>TODAY</button>
-          <button onClick={() => this._handleDateChange(1)}>
+          <button onClick={() => this._handleDateChange(-1)}>
             <Icon name="keyboard_arrow_left" />
           </button>
           <button onClick={() => this._handleDateChange(1)}>

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import styles from './Day.css';
 import PropTypes from 'prop-types';
-import { getDayHours } from 'utils/dateUtils';
-import Timeslot from './Timeslot';
+import { getDayHours, isSameDate } from 'utils/dateUtils';
+import { calculatePosition } from '../util';
+import { getTimeClassName } from '../util';
 import EventModal from '../EventModal/EventModal';
+import DayGrid from './DayGrid';
+import Timeline from './Timeline';
 
+const gridHeight = 60; //Pixels. 1 hour grid height
 
 export default class Day extends Component {
 
@@ -12,54 +16,41 @@ export default class Day extends Component {
     super(props);
     this.state = {
       isOpen: false
-    }
+    };
     this._handleClose = this._handleClose.bind(this);
     this._openEventModal = this._openEventModal.bind(this);
   }
-  componentDidMount() {
-    this.forceUpdate();
-  }
+
 
   _handleClose() {
     this.setState({ isOpen: false });
   }
 
-  _openEventModal(selectedDate) {
-    this.setState({ isOpen: true });
+  _openEventModal(startTime, endTime) {
+    this.setState({ isOpen: true, startTime, endTime });
   }
 
-  _renderEvents(events, selectedDate, gridElement) {
-    const selectedDatesEvents = events.filter((event) => event.startDate === selectedDate );
-    console.log(events, selectedDate, gridElement);
-  }
 
   render() {
     const { selectedDate, events, addEvent } = this.props;
-    const { isOpen } = this.state;
+    const { isOpen, startTime, endTime } = this.state;
     return (
       <div className={styles.container}>
-        <div
-          ref={(el) => this.grid = el}
-          className={styles.grid}
-        >
-          {
-            getDayHours().map(time => (
-              <div className={styles.time} key={time}>
-                <span>{time}</span>
-                <Timeslot
-                  time={time}
-                  onTimeslotClick={this._openEventModal}
-                />
-              </div>
-            ))
-          }
-        </div>
+        <Timeline />
+        <DayGrid
+          events={events}
+          selectedDate={selectedDate}
+          openEventModal={this._openEventModal}
+          modalIsOpen={isOpen}
+        />
         <EventModal
           isOpen={isOpen}
           onClose={this._handleClose}
           addEvent={addEvent}
+          startTime={startTime}
+          endTime={endTime}
+          selectedDate={selectedDate}
         />
-        {this._renderEvents(events, selectedDate, this.grid)}
       </div>
     );
   }

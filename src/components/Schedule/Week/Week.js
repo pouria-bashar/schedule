@@ -12,18 +12,18 @@ class Week extends Component {
           <div />
           {
             WEEKDAYS.map(day => (
-              <div>{day}</div>
+              <div key={day}>{day}</div>
             ))
           }
         </div>
         <div className={styles.grid}>
           {
             getDayHours().map(time => (
-              <div className={styles.time} key={time}>
+              <div key={time} className={styles.time} key={time}>
                 <span>{time}</span>
                 {
                   WEEKDAYS.map(day => (
-                    <div className={styles.day}/>
+                    <div key={day} className={styles.day} />
                   ))
                 }
               </div>

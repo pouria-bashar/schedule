@@ -1,0 +1,26 @@
+@import "../../colours";
+
+.timepicker {
+  position: relative;
+}
+
+
+.options {
+  position: absolute;
+  top: 37px;
+  left: 0;
+  right: 0;
+  height: 200px;
+  overflow: auto;
+  z-index: 1;
+  background: white;
+  border: solid 1px $clouds;;
+}
+
+.options li {
+  padding: 10px;
+  cursor: pointer;
+}
+.options li:hover {
+  background: $clouds;
+}

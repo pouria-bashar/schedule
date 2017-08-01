@@ -4,7 +4,8 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "react-dom": "15.5.4",
     "react-modal": "^2.2.2",
     "react-redux": "^5.0.5",
+    "react-transition-group": "^1.2.0",
     "react-virtualized": "^9.9.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

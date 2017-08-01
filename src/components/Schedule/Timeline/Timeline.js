@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Month extends Component {
+class Timeline extends Component {
 
   render() {
     return (
@@ -9,7 +9,5 @@ class Month extends Component {
     );
   }
 }
-Month.propTypes = {
 
-};
-export default Month;
+export default Timeline;

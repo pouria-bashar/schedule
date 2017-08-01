@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import NewEvent from './NewEvent';
+import styles from './EventModal.css';
 
 const style = {
   overlay: {
@@ -17,7 +18,6 @@ const style = {
     border: 0,
     transform: 'translate(-50%, -50%)',
     width: '664px',
-    minHeight: '224px',
     padding: 0,
     overflow: 'visible',
     borderRadius: 'none',
@@ -31,6 +31,8 @@ export default class EventModal extends Component {
       isOpen,
       onClose,
       addEvent,
+      startTime,
+      endTime,
     } = this.props;
 
     return (
@@ -40,7 +42,13 @@ export default class EventModal extends Component {
         contentLabel="Modal"
         style={style}
       >
-        <NewEvent onClose={onClose} addEvent={addEvent} />
+        <NewEvent
+          onClose={onClose}
+          addEvent={addEvent}
+          startTime={startTime}
+          endTime={endTime}
+          startDate={selectedDate}
+        />
       </Modal>
     );
   }
@@ -49,4 +57,6 @@ EventModal.propTypes = {
   selectedDate: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
 };

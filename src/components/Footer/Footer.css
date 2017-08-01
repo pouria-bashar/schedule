@@ -1,5 +1,5 @@
 @import "../../colours";
 .footer {
-  background: $emrald;
+  background: rgba(149, 165, 166, 0.29);
   height: 60px;
 }

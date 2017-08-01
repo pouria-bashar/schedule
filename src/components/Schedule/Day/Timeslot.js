@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Day.css';
 import { addToTime } from 'utils/dateUtils';
+import classNames from 'classnames/bind';
 
-const Timeslot = ({ onTimeslotClick, time }) => (
-  <div className={styles.timeslot}>
-    <div onClick={() => onTimeslotClick(time)} />
-    <div onClick={() => onTimeslotClick(addToTime(time, 30))} />
-  </div>
-);
-Timeslot.propTypes = {
-  onTimeslotClick: PropTypes.func,
+const cx = classNames.bind(styles);
+
+
+class TimeSlot extends Component {
+
+  render() {
+    const { onTimeslotClick, time , onMouseDown, onMouseUp, registerChild, isSelected, text } = this.props;
+    return (
+      <div className={cx({ timeslot: true, isSelected })}
+        onMouseDown={onMouseDown}
+        ref={registerChild}
+      >{text}
+      </div>
+    );
+  }
+}
+TimeSlot.propTypes = {
   time: PropTypes.string,
 };
-export default Timeslot;
+export default TimeSlot;
