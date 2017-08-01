@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styleguide.css';
-import { Toolbar, Schedule, Footer } from 'components';
+import { Toolbar, Schedule, Footer, Day } from 'components';
 
 export default class App extends Component {
 

@@ -21,29 +21,6 @@
 .form {
   padding: 20px;
 }
-.form label {
-  margin-right: 10px;
-  max-width: 120px;
-  min-width: 120px;
-}
-
-.form > div {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.form > div > span{
-  flex: 0 1 100%;
-  padding: 8px 0;
-  margin-left: 130px;
-  color: $pomegranate;
-}
-
-.form input {
-  padding: 10px;
-}
 
 .actions {
   margin-top: 20px;
@@ -61,6 +38,14 @@
 }
 .actions button:last-child {
   background-color: $silver;
+}
+
+.colors {
+  display: flex;
+  align-items: center;
+}
+.colors label{
+  min-width: 120px;
 }
 
 .colors button {

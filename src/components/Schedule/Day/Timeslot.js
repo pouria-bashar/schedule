@@ -10,12 +10,13 @@ const cx = classNames.bind(styles);
 class TimeSlot extends Component {
 
   render() {
-    const { onTimeslotClick, time , onMouseDown, onMouseUp, registerChild, isSelected } = this.props;
+    const { onTimeslotClick, time , onMouseDown, onMouseUp, registerChild, isSelected, text } = this.props;
     return (
       <div className={cx({ timeslot: true, isSelected })}
         onMouseDown={onMouseDown}
         ref={registerChild}
-      />
+      >{text}
+      </div>
     );
   }
 }

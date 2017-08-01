@@ -13,7 +13,10 @@ const EventEntry = ({ style, event }) => (
         [event.endTime]: true,
         [`${getTimeClassName(event.endTime)}`]: true,
       })}
-    style={style}>{event.title}
+    style={style}
+    >
+      <span>{`${event.startTime} - ${event.endTime}`}</span>
+      <span>{event.title}</span>
   </div>
 );
 EventEntry.propTypes = {

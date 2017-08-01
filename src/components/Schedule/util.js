@@ -12,15 +12,14 @@ export const calculatePosition = ({ event, rect, gridHeight, numberOfEntriesInHo
   const height = (pixelPerMinute * duration);
   const width = 100 / numberOfEntriesInHour;
 
-  const left = index * (100 / numberOfEntriesInHour) + 6;
+  const left = index * (100 / numberOfEntriesInHour);
   return {
     style: {
       backgroundColor,
       height: `${duration}px`,
       top: `${top}px`,
       position: 'absolute',
-      right: '0',
-      left: `0px`,
+      left: `${left}%`,
       width: `${width}%`
     }
   }

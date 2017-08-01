@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './Day.css';
 import { calculatePosition } from '../util';
 import { getTimeClassName } from '../util';
-import { getDayHours, isSameDate } from 'utils/dateUtils';
+import { getDayHours, isSameDate , addToTime} from 'utils/dateUtils';
 import Timeslot from './Timeslot';
 import EventEntry from './EventEntry';
 import { debounce } from 'lodash';
 
 const timeslotHeight = 30;
-const gridHeight = 60; //Pixels. 1 hour grid height
+const gridHeight = 60;
 
 const daySlots = getDayHours(30, 14);
 class DayGrid extends Component {
@@ -33,38 +33,57 @@ class DayGrid extends Component {
   _renderEvents(events = [], selectedDate, gridElement) {
     if(!gridElement) return;
     const selectedDatesEvents = events.filter((event) => isSameDate(event.startDate, selectedDate));
-    return selectedDatesEvents.map((event, index) => {
+    return selectedDatesEvents.map((event, _index) => {
       const rect = gridElement.getBoundingClientRect();
       const elementsWithSameEndTime = gridElement.getElementsByClassName(getTimeClassName(event.endTime));
+      let index = 0;
+      for (let i = 0; i < elementsWithSameEndTime.length; i++) {
+          const className = elementsWithSameEndTime[i].className;
+          if (className.indexOf(event.endTime) > 0) {
+            index = i;
+            break;
+          }
+      }
       const position = calculatePosition({ event, rect, gridHeight, numberOfEntriesInHour: elementsWithSameEndTime.length, index });
       return (
         <EventEntry
           style={position.style}
           event={event}
-          key={index}
+          key={_index}
         />
       )
     });
   }
 
   _handleMouseDown(e) {
+    e.preventDefault();
     const rect = this.grid.getBoundingClientRect();
-
     const top = e.pageY - rect.top;
-    // const left = e.pageX - rect.left;
 
-    this.setState({ top, isDraging: true, boxStyle: {}, firstIndex: undefined, lastIndex: undefined });
+    this.setState({
+        top,
+        isDraging: true,
+        boxStyle: {},
+        firstIndex: undefined,
+        lastIndex: undefined
+      });
   }
 
   _handleMouseUp(e) {
-    console.log('mouse up', e.which);
+    e.preventDefault();
     const { firstIndex, lastIndex } = this.state;
-    this.setState({ isDraging: false, boxStyle: {} });
-    this.props.openEventModal(daySlots[firstIndex], daySlots[lastIndex]);
+    this.setState({
+      isDraging: false,
+      boxStyle: {}
+    });
+    const startTime = daySlots[firstIndex];
+    const endTime = addToTime(daySlots[lastIndex], 30);
+    this.props.openEventModal(startTime, endTime);
   }
 
   _handleMouseMove(e) {
     const { isDraging, top, left } = this.state;
+
     if(isDraging) {
       const rect = this.grid.getBoundingClientRect();
 
@@ -98,16 +117,20 @@ class DayGrid extends Component {
         onMouseMove={this._handleMouseMove}
       >
         {
-          daySlots.map((time, index) => (
-            <Timeslot
-              time={time}
-              key={time}
-              text={index === firstIndex ? `${daySlots[firstIndex]}-${daySlots[lastIndex]}` : ''}
-              isSelected={(modalIsOpen || isDraging) && (index >= firstIndex && index <= lastIndex)}
-              onMouseDown={this._handleMouseDown}
-              registerChild={el => this[`item_${index}`] = el}
-            />
-          ))
+          daySlots.map((time, index) => {
+            const isSelected = (modalIsOpen || isDraging) && (index >= firstIndex && index <= lastIndex);
+            const text = isSelected && index === firstIndex ? `${daySlots[firstIndex]} - ${addToTime(daySlots[lastIndex], 30)}` : '';
+            return (
+              <Timeslot
+                time={time}
+                key={time}
+                text={text}
+                isSelected={isSelected}
+                onMouseDown={this._handleMouseDown}
+                registerChild={el => this[`item_${index}`] = el}
+              />
+            )
+          })
         }
         {this._renderEvents(events, selectedDate, this.grid)}
       </div>

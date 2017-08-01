@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import NewEvent from './NewEvent';
-import { CSSTransitionGroup } from 'react-transition-group'
 import styles from './EventModal.css';
 
 const style = {
@@ -43,26 +42,13 @@ export default class EventModal extends Component {
         contentLabel="Modal"
         style={style}
       >
-      <CSSTransitionGroup
-          transitionName={{
-            appear: styles.appear,
-            appearActive: styles.appearActive,
-            leave: styles.leave,
-            leaveActive: styles.leaveActive,
-          }}
-          transitionAppear
-          transitionLeave
-          transitionEnter={false}
-          transitionAppearTimeout={300}
-          transitionLeaveTimeout={300}
-        >
-          <NewEvent
-            onClose={onClose}
-            addEvent={addEvent}
-            startTime={startTime}
-            endTime={endTime}
-          />
-        </CSSTransitionGroup>
+        <NewEvent
+          onClose={onClose}
+          addEvent={addEvent}
+          startTime={startTime}
+          endTime={endTime}
+          startDate={selectedDate}
+        />
       </Modal>
     );
   }

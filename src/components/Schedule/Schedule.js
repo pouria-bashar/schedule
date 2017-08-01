@@ -5,12 +5,13 @@ import { addEvent } from 'actions';
 import Day from './Day/Day';
 import Week from './Week/Week';
 import Month from './Month/Month';
-import styles from './Schedule.css';
+import Timeline from './Timeline/Timeline';
 
 const views = {
   day: Day,
   week: Week,
   month: Month,
+  timeline: Timeline,
 }
 class Schedule extends Component {
 
@@ -18,7 +19,7 @@ class Schedule extends Component {
     const { view, selectedDate, addEvent, events } = this.props;
     const View = views[view];
     return (
-      <div className={styles.container}>
+      <div>
         <View
           selectedDate={selectedDate}
           events={events}

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import styles from './Day.css';
 import PropTypes from 'prop-types';
 import { getDayHours, isSameDate } from 'utils/dateUtils';
-import EventModal from '../EventModal/EventModal';
 import { calculatePosition } from '../util';
+import { getTimeClassName } from '../util';
+import EventModal from '../EventModal/EventModal';
 import DayGrid from './DayGrid';
 import Timeline from './Timeline';
-import { getTimeClassName } from '../util';
 
 const gridHeight = 60; //Pixels. 1 hour grid height
 
@@ -49,6 +49,7 @@ export default class Day extends Component {
           addEvent={addEvent}
           startTime={startTime}
           endTime={endTime}
+          selectedDate={selectedDate}
         />
       </div>
     );

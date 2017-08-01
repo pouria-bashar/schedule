@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './EventModal.css';
-import { Icon, DatePicker, TimePicker, FormField } from 'components';
+import { Icon, DatePicker, TimePicker, FormField, ColorPicker } from 'components';
 import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'constants';
 import moment from 'moment';
 import AddSuccess from './AddSuccess';
 import validate from './validate';
 
-const colors = [
-  '#f1c40f',
-  '#2ecc71',
-  '#3498db',
-  '#e67e22',
-  '#e74c3c',
-  '#7f8c8d',
-]
+
 class NewEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
-      backgroundColor: colors[0],
       startTime: props.startTime,
       endTime: props.endTime,
-      errors: {},
+      errors: {
+      },
     };
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleBlur = this._handleBlur.bind(this);
-    this._handleDateChange = this._handleDateChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,9 +30,9 @@ class NewEvent extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    const { addEvent, onClose } = this.props;
+    const { addEvent, onClose, startDate } = this.props;
     // Check if valid
-    this.props.addEvent(this.state);
+    this.props.addEvent({ ...this.state, startDate });
     onClose();
   }
 
@@ -50,11 +41,6 @@ class NewEvent extends Component {
     this.setState({ [name]: value });
   }
 
-  _handleDateChange(startDate) {
-    if(startDate) {
-      this.setState({ startDate: startDate.toDate() });
-    }
-  }
 
   _handleBlur(e) {
     /**
@@ -63,9 +49,8 @@ class NewEvent extends Component {
   }
 
   render() {
-    const { onClose, addEvent } = this.props;
-    const { startDate, errors, startTime, endTime } = this.state;
-
+    const { onClose, addEvent, startDate } = this.props;
+    const { errors, startTime, endTime } = this.state;
     return (
       <div className={styles.newEvent}>
         <div className={styles.header}>
@@ -84,16 +69,6 @@ class NewEvent extends Component {
               className={styles.title}
               onChange={this._handleChange}
               registerChild={(el) => this.title = el}
-            />
-            <FormField
-              field={DatePicker}
-              label="Title"
-              name="startDate"
-              error={errors['startDate']}
-              selectedDate={startDate}
-              onChange={this._handleDateChange}
-              format={DATE_FORMAT}
-              value={moment(startDate).format(DATE_FORMAT)}
             />
             <FormField
               field={TimePicker}
@@ -121,21 +96,13 @@ class NewEvent extends Component {
               className={styles.description}
               onChange={this._handleChange}
             />
-            <div className={styles.colors}>
-              <label>Event Color:</label>
-              {
-                colors.map(backgroundColor => (
-                  <button
-                    key={backgroundColor}
-                    type="button"
-                    style={{ backgroundColor }}
-                    onClick={() => this.setState({ backgroundColor })}
-                  >
-                    {backgroundColor === this.state.backgroundColor && <Icon name="done" />}
-                  </button>
-                ))
-              }
-            </div>
+            <FormField
+              label="Event Color"
+              name="backgroundColor"
+              field={ColorPicker}
+              error={errors['description']}
+              onChange={this._handleChange}
+            />
           <div className={styles.actions}>
             <button type="submit">Save</button>
             <button onClick={onClose} type="button">Cancel</button>

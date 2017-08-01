@@ -39,20 +39,27 @@
   height: 30px;
   box-sizing: border-box;
   cursor: pointer;
+  padding: 8px;
 }
 
 .grid {
   position: relative;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 
 .eventEntry {
-  padding: 10px;
+  min-height: 30px;
+  padding: 8px;
   box-sizing: border-box;
+  &>span:first-child {
+    margin-right: 10px;
+  }
 }
 
 
 .isSelected {
-  background: $pomegranate;
+  background: rgba(52, 73, 94, 0.63);
+  border: 0;
 }
