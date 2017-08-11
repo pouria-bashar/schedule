@@ -16,7 +16,7 @@
   padding: 10px;
   box-sizing: border-box;
   border: solid 1px $clouds;
-  border-bottom: 0;
+  border-top: 0;
 }
 
 .time {
@@ -45,7 +45,6 @@
 .grid {
   position: relative;
   flex-grow: 1;
-  overflow: hidden;
 }
 
 

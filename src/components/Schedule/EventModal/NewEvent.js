@@ -6,7 +6,7 @@ import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'constants';
 import moment from 'moment';
 import AddSuccess from './AddSuccess';
 import validate from './validate';
-
+import { colors } from '../../ColorPicker/ColorPicker';
 
 class NewEvent extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class NewEvent extends Component {
     this.state = {
       startTime: props.startTime,
       endTime: props.endTime,
+      backgroundColor: colors[0],
       errors: {
       },
     };

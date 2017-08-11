@@ -2,7 +2,7 @@ import { getDuration } from 'utils/dateUtils';
 
 const firstColumnWidth = 100;
 
-export const calculatePosition = ({ event, rect, gridHeight, numberOfEntriesInHour, index }) => {
+export const calculatePosition = ({ event, gridHeight, index }) => {
   const { backgroundColor, startTime, endTime } = event;
   const pixelPerMinute = (gridHeight + 1) / 60;
   const duration = getDuration(startTime, endTime);
@@ -10,9 +10,9 @@ export const calculatePosition = ({ event, rect, gridHeight, numberOfEntriesInHo
 
   const top = (pixelPerMinute * topDuration);
   const height = (pixelPerMinute * duration);
-  const width = 100 / numberOfEntriesInHour;
+  const width = 100;
 
-  const left = index * (100 / numberOfEntriesInHour);
+  const left = 0;
   return {
     style: {
       backgroundColor,

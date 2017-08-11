@@ -6,7 +6,7 @@ import{ Icon } from 'components';
 
 const cx = classNames.bind(styles);
 
-const colors = [
+export const colors = [
   '#f1c40f',
   '#2ecc71',
   '#3498db',

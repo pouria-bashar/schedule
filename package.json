@@ -5,29 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "webpack -p"
+    "build": "NODE_ENV=production webpack -p --progress"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
-  },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.0.20",

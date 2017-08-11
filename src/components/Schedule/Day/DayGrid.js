@@ -26,25 +26,12 @@ class DayGrid extends Component {
       lastIndex: undefined,
     }
   }
-  componentDidMount() {
-    this.forceUpdate();
-  }
 
   _renderEvents(events = [], selectedDate, gridElement) {
     if(!gridElement) return;
     const selectedDatesEvents = events.filter((event) => isSameDate(event.startDate, selectedDate));
     return selectedDatesEvents.map((event, _index) => {
-      const rect = gridElement.getBoundingClientRect();
-      const elementsWithSameEndTime = gridElement.getElementsByClassName(getTimeClassName(event.endTime));
-      let index = 0;
-      for (let i = 0; i < elementsWithSameEndTime.length; i++) {
-          const className = elementsWithSameEndTime[i].className;
-          if (className.indexOf(event.endTime) > 0) {
-            index = i;
-            break;
-          }
-      }
-      const position = calculatePosition({ event, rect, gridHeight, numberOfEntriesInHour: elementsWithSameEndTime.length, index });
+      const position = calculatePosition({ event, gridHeight });
       return (
         <EventEntry
           style={position.style}
@@ -108,7 +95,6 @@ class DayGrid extends Component {
     const { events, selectedDate, modalIsOpen } = this.props;
 
     const { firstIndex, lastIndex, boxStyle , isDraging} = this.state;
-
     return (
       <div
         ref={(el) => this.grid = el}

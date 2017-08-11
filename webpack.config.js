@@ -2,18 +2,33 @@ const path = require('path');
 const webpack = require('webpack');
 const { resolve } = require('path');
 
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const entry = isProduction ? ['./src/index'] : [
+  'webpack-hot-middleware/client',
+  './src/index'
+]
+
+const devtool = isProduction ? '' : 'cheap-module-eval-source-map';
+
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './src/index'
-  ],
+  devtool,
+  entry,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
+  plugins: isProduction ? [
+    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+      NODE_ENV: JSON.stringify('production'),
+    },
+  })
+  ] :
+  [
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
