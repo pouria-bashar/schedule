@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './EventModal.css';
 import { Icon, DatePicker, TimePicker, FormField, ColorPicker } from 'components';
-import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'constants';
+import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'appConstants';
 import moment from 'moment';
 import AddSuccess from './AddSuccess';
 import validate from './validate';
-import { colors } from '../../ColorPicker/ColorPicker';
+import { colors } from 'appConstants';
 
 class NewEvent extends Component {
   constructor(props) {

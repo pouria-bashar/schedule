@@ -6,7 +6,7 @@ import { calculatePosition } from '../util';
 import { getTimeClassName } from '../util';
 import EventModal from '../EventModal/EventModal';
 import DayGrid from './DayGrid';
-import Timeline from './Timeline';
+import HoursTimeline from './HoursTimeline';
 
 const gridHeight = 60; //Pixels. 1 hour grid height
 
@@ -36,7 +36,7 @@ export default class Day extends Component {
     const { isOpen, startTime, endTime } = this.state;
     return (
       <div className={styles.container}>
-        <Timeline />
+        <HoursTimeline />
         <DayGrid
           events={events}
           selectedDate={selectedDate}

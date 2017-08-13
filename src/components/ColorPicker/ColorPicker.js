@@ -3,17 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './ColorPicker.css';
 import classNames from 'classnames/bind';
 import{ Icon } from 'components';
+import { colors } from 'appConstants';
 
 const cx = classNames.bind(styles);
-
-export const colors = [
-  '#f1c40f',
-  '#2ecc71',
-  '#3498db',
-  '#e67e22',
-  '#e74c3c',
-  '#7f8c8d',
-]
 
 class ColorPicker extends Component {
 

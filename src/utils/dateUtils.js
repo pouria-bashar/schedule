@@ -1,5 +1,5 @@
 import moment from 'moment';
-import * as Constants from 'constants'
+import * as Constants from 'appConstants'
 
 export const getDayHours = (interval = 60, sliceItems = 7) => {
   const dt = new Date(1970, 0, 1, 0, 0, 0, 0);

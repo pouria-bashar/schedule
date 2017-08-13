@@ -4,7 +4,7 @@ import styles from './Toolbar.css';
 import classNames from 'classnames/bind';
 import { Icon, Calendar } from '../index';
 import moment from 'moment';
-import { DISPLAY_DATE_FORMAT } from 'constants';
+import { DISPLAY_DATE_FORMAT } from 'appConstants';
 
 const cx = classNames.bind(styles);
 

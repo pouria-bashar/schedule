@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Week.css';
 import { getDayHours } from 'utils/dateUtils';
-import { WEEKDAYS } from 'constants';
+import { WEEKDAYS } from 'appConstants';
+
 class Week extends Component {
 
   render() {

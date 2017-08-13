@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Day.css';
 import { getDayHours, isSameDate } from 'utils/dateUtils';
 
-const Timeline = ({ name }) => (
+const HoursTimeline = ({ name }) => (
   <div className={styles.timeline}>
     {
       getDayHours().map(time => (
@@ -12,7 +12,7 @@ const Timeline = ({ name }) => (
     }
   </div>
 );
-Timeline.propTypes = {
+HoursTimeline.propTypes = {
   name: PropTypes.string,
 };
-export default Timeline;
+export default HoursTimeline;
