@@ -27,8 +27,7 @@ class DayGrid extends Component {
     }
   }
 
-  _renderEvents(events = [], selectedDate, gridElement) {
-    if(!gridElement) return;
+  _renderEvents(events = [], selectedDate) {
     const selectedDatesEvents = events.filter((event) => isSameDate(event.startDate, selectedDate));
     return selectedDatesEvents.map((event, _index) => {
       const position = calculatePosition({ event, gridHeight });

@@ -11,3 +11,4 @@ export { default as DatePicker } from './DatePicker/DatePicker';
 export { default as TimePicker } from './TimePicker/TimePicker';
 export { default as FormField } from './FormField/FormField';
 export { default as ColorPicker } from './ColorPicker/ColorPicker';
+export { default as DropDown } from './DropDown/DropDown';

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './EventModal.css';
-import { Icon, DatePicker, TimePicker, FormField, ColorPicker } from 'components';
-import { DISPLAY_DATE_FORMAT, DATE_FORMAT } from 'appConstants';
+import { Icon, DatePicker, TimePicker, FormField, ColorPicker , DropDown} from 'components';
+import { DISPLAY_DATE_FORMAT, DATE_FORMAT, ROOMS } from 'appConstants';
 import moment from 'moment';
 import AddSuccess from './AddSuccess';
 import validate from './validate';
 import { colors } from 'appConstants';
+import { getDayHours } from 'utils/dateUtils';
 
 class NewEvent extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class NewEvent extends Component {
 
   render() {
     const { onClose, addEvent, startDate } = this.props;
-    const { errors, startTime, endTime } = this.state;
+    const { errors, startTime, endTime, room } = this.state;
     return (
       <div className={styles.newEvent}>
         <div className={styles.header}>
@@ -72,7 +73,8 @@ class NewEvent extends Component {
               registerChild={(el) => this.title = el}
             />
             <FormField
-              field={TimePicker}
+              field={DropDown}
+              options={getDayHours(30, 14)}
               label="From"
               name="startTime"
               error={errors['startTime']}
@@ -80,13 +82,24 @@ class NewEvent extends Component {
               value={startTime}
             />
             <FormField
-              field={TimePicker}
+              field={DropDown}
+              options={getDayHours(30, 14)}
               label="To"
               name="endTime"
               error={errors['endTime']}
               onChange={this._handleChange}
               onSelect={(endTime) => this.setState({ endTime })}
               value={endTime}
+            />
+            <FormField
+              field={DropDown}
+              options={ROOMS}
+              label="Room"
+              name="room"
+              error={errors['room']}
+              onChange={this._handleChange}
+              onSelect={(endTime) => this.setState({ room })}
+              value={room}
             />
             <FormField
               label="Description"

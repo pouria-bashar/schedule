@@ -10,3 +10,6 @@ export const colors = [
   '#e74c3c',
   '#7f8c8d',
 ]
+
+
+export const ROOMS = ['Room 1', 'Room 2', 'Room 3', 'Room 4', 'Room 5', 'Room 6', 'Room 7'];

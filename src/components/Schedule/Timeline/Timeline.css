@@ -2,9 +2,8 @@
 .timeHeader {
   border: solid 1px $clouds;
   border-right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
   user-select: none;
 }
 
