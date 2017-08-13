@@ -1,0 +1,28 @@
+@import "../../../colours";
+.timeHeader {
+  border: solid 1px $clouds;
+  border-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.timeslot {
+  border: solid 1px $clouds;
+  border-right: 0;
+  border-top: 0;
+}
+
+.grid {
+  border: solid 1px $clouds;
+}
+
+.resource {
+  border-top: solid 1px $clouds;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  user-select: none;
+}
